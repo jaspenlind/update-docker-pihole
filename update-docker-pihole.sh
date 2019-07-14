@@ -80,8 +80,8 @@ if [ -n "$ENV_PATH" ] ; then
 fi
 
 echo Fetching latest pihole Docker image
-sudo docker pull pihole/pihole
+docker pull pihole/pihole
 echo Removing current pihole container
-sudo docker rm -f pihole
+docker rm -f pihole
 echo Creating and starting the new pihole container
-sudo docker run --name pihole --privileged --network host --restart always$ARGS pihole/pihole
+docker run --name pihole --privileged --network host --restart always$ARGS pihole/pihole
