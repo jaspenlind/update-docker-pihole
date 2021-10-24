@@ -1,0 +1,46 @@
+version: '2'
+
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    hostname: pihole
+    domainname: pi.hole
+    mac_address: d0:ca:ab:cd:ef:01
+    cap_add:
+      - NET_ADMIN
+    networks:
+      pihole_network:
+        ipv4_address: "${ServerIP}"
+    dns:
+      - 127.0.0.1
+    ports:
+      - 443/tcp
+      - 53/tcp
+      - 53/udp
+      - 67/udp
+      - 80/tcp
+    environment:
+      DNS1: 1.1.1.1
+      DNS2: 1.0.0.1
+      IPv6: "False"
+      ServerIP: "${ServerIP}"
+      TZ: "SE"
+      VIRTUAL_HOST: pi.hole
+      WEBPASSWORD: "${WEBPASSWORD}"
+      # WEB_PORT: 5353
+    restart: unless-stopped
+    volumes:
+      - /volume1/docker/pihole/pihole_app:/etc/pihole
+      - /volume1/docker/pihole/dns_config:/etc/dnsmasq.d
+
+networks:
+  pihole_network:
+    driver: macvlan
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+          gateway: 192.168.1.1
+          ip_range: 192.168.1.192/28

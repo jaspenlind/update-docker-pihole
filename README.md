@@ -2,18 +2,24 @@
 
 Tool for updating a pihole docker image to the latest version
 
-## Usage: update-docker-pihole
+## docker-compose
 
-### Options
+Edit the docker-compose.yml file to reflect your setup
 
-| Arg                 | Description                                           |
-| :------------------ | ----------------------------------------------------- |
-| -e, --env           | Path to Docker container environmenment settings file |
-| -r, --resolveconfig | Path to existing resolv.conf file                     |
-| --hosts             | Path to existing hosts file                           |
-| -c, --configpath    | Path to existing config folder                        |
-| -l, --log           | Path to existing log folder                           |
-| -h, --help          | Shows this help text                                  |
+## Environment
+
+* Create an .env-file and configure your environment settings
+
+```bash
+ServerIP=<<YOUR_PIHOLE_SERVER_IP>>
+WEBPASSWORD=<<YOUR_PIHOLE_PASSWORD>>
+```
+
+## Usage
+
+```bash
+sudo docker-compose up
+```
 
 ## Running pihole in docker container on a Synology NAS
 
