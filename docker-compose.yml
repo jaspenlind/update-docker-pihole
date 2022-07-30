@@ -28,6 +28,7 @@ services:
       TZ: "SE"
       VIRTUAL_HOST: pi.hole
       WEBPASSWORD: "${WEBPASSWORD}"
+      DNSMASQ_USER: root
       # WEB_PORT: 5353
     restart: unless-stopped
     volumes:
